@@ -42,7 +42,7 @@ J = 1/m.*sum(-y.*log(sigmoid(X*theta)) - (1 - y).*log(1 - sigmoid(X*theta)));
 J = J + lambda/(2*m)*sum(temp.^2);
 
 grad = 1/m*transpose(X)*(sigmoid(X*theta) - y);
-grad = grad + lambda/m*theta;
+grad = grad + lambda/m*temp;
 % =============================================================
 
 grad = grad(:);
