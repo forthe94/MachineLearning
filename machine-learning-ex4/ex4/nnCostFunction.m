@@ -91,10 +91,19 @@ Theta2_grad = zeros(size(Theta2));
 
   J = J + Jreg;
 
+  delta3 = a3 - vecY;
+  delta3size = size(delta3);
 
+  delta2 = transpose(Theta2(:,2:hidden_layer_size+1))*delta3.*sigmoidGradient(Theta1*X);  
+  delta2size = size(delta2);
 
+  Theta1_grad = delta2*transpose(X)/m;
+  theta1_gradsize = size(Theta1_grad);
+  Theta2_grad = delta3*transpose(a2)/m;
+  theta2_gradsize = size(Theta2_grad);
 
-
+  Theta1_grad(:,2:input_layer_size+1) = Theta1_grad(:,2:input_layer_size+1) + lambda/m*Theta1(:,2:input_layer_size+1);  
+  Theta2_grad(:,2:hidden_layer_size+1) = Theta2_grad(:,2:hidden_layer_size+1) + lambda/m*Theta2(:,2:hidden_layer_size+1);  
 
 
 
@@ -107,6 +116,5 @@ Theta2_grad = zeros(size(Theta2));
 
 % Unroll gradients
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
-
 
 end
