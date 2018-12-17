@@ -7,7 +7,7 @@ function [J, grad] = linearRegCostFunction(X, y, theta, lambda)
 
 % Initialize some useful values
 m = length(y); % number of training examples
-
+j = length(theta);
 % You need to return the following variables correctly 
 J = 0;
 grad = zeros(size(theta));
@@ -22,11 +22,12 @@ grad = zeros(size(theta));
 
 
 
+J = 1/(2*m)*(sum((X*theta - y).^2)) + lambda/(2*m)*sum(theta(2:length(theta)).^2);
 
 
+grad(1) = 1/m * transpose((X*theta - y))*X(:,1);
 
-
-
+grad(2:j) = 1/m*transpose(X(:,2:j))*(X*theta - y) + lambda/m * theta(2:j);
 
 
 
